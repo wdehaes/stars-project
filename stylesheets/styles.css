@@ -33,6 +33,11 @@
   color: #FFEA00;
 }
 
+/* line 37, ../sass/partials/_base.scss */
+div, p {
+  margin: 10px 0;
+}
+
 /* line 1, ../sass/partials/_paper.scss */
 #sky {
   background-color: #0D1635;
@@ -147,4 +152,17 @@
 /* line 98, ../sass/partials/_paper.scss */
 .start-bottom__element .percent {
   font-size: 36px;
+}
+
+/* line 103, ../sass/partials/_paper.scss */
+#circle-text {
+  position: absolute;
+  display: block;
+  left: 44%;
+  top: 60%;
+  font-family: ConcourseT6;
+  font-size: 24px;
+  letter-spacing: 0.99px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
 }

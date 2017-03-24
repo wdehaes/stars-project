@@ -99,3 +99,15 @@
     font-size: 36px;
   }
 }
+
+#circle-text {
+  position: absolute;
+  display: block;
+  left: 44%;
+  top: 60%;
+  font-family: ConcourseT6;
+  font-size: 24px;
+  letter-spacing: 0.99px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
