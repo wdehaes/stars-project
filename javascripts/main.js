@@ -28,7 +28,7 @@ $(document).ready(function() {
     elementsCreation,
     protostar,
     starryNight
-  ]
+  ];
 
 
   var circleText = $('#circle-text');
@@ -41,11 +41,6 @@ $(document).ready(function() {
   var protoText = $('#proto-text');
   protoText.circleType({radius: 70, dir:-1});
 
-function randomInt(max, min = 0) {
-  return Math.floor(random(max, min));
-}
-function random(max, min = 0) {
-  return Math.random() * (max - min) + min;
-}
+
 
 //https://github.com/promo/wheel-indicator

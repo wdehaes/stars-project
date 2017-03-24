@@ -1,17 +1,6 @@
 //Import fonts
 @import "partials/fonts";
 
-// Import Bootstrap Compass integration
-@import "bootstrap-compass";
-
-// Import custom Bootstrap variables
-@import "bootstrap-variables";
-
-// Import Bootstrap for Sass
-@import "bootstrap";
-
 @import "partials/base";
 
-@import "partials/intro";
-@import "partials/elements-section";
-@import "partials/stars-section";
+@import "partials/paper";

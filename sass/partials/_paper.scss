@@ -1,0 +1,101 @@
+#sky {
+  background-color: #0D1635;
+  height: 100vh;
+  width: 100vw;
+}
+
+#sky-overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  font-weight: $base-font-weight;
+  line-height: $base-line-height;
+  color: white;
+}
+
+.intro {
+  position: absolute;
+  font-family: ConcourseT7;
+  left: 50%;
+  top: 63%;
+  transform: translateX(-50%);
+  font-size: 44px;
+  font-weight: $regular;
+  letter-spacing: 0.1px;
+  text-align: center;
+  display: none;
+}
+
+.intro__first {
+  text-transform: uppercase;
+  font-family: ConcourseC7;
+  font-size: 28px;
+}
+
+.start-top {
+  position: absolute;
+  top: 7.3%;
+  left: 6.7%;
+}
+
+.start-top__first {
+  font-family: ConcourseT6;
+  font-size: 48px;
+  letter-spacing: 0.18px;
+  opacity: 0;
+}
+
+.start-top__second {
+  font-family: "Lucida Grande";
+  font-weight: bold;
+  letter-spacing: 0.1px;
+  opacity: 0;
+}
+
+.start-top__second-first {
+  font-size: 24px;
+}
+
+.start-top__second-second {
+  font-size: 28px;
+}
+
+.start-top__second-third {
+  font-size: 18px;
+}
+
+.start-hydrogen {
+  position: absolute;
+  left: 38.2%;
+  top: 51.6%;
+  opacity: 0;
+}
+
+.start-helium {
+  position: absolute;
+  left: 41.7%;
+  top: 38%;
+  opacity: 0;
+}
+
+.start-bottom {
+  position: absolute;
+  bottom: 6.8%;
+  left: 6.7%;
+  opacity: 0;
+}
+
+.start-bottom__element {
+  font-size: 48px;
+  font-family: "Lucida Grande";
+  font-weight: bold;
+
+  .percent {
+    font-size: 36px;
+  }
+}

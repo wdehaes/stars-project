@@ -4,7 +4,7 @@ function introOpening(intro) {
   tl.from(intro, 0.6, {
     y: "400px",
     ease: Back.easeOut.config(1)
-  })
+  });
 }
 
 function introToStart() {

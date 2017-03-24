@@ -1,4 +1,7 @@
 function protostar() {
+  function newCoordinates(oldCoordinates) {
+    // body...
+  }
   var tl_proto = new TimelineLite({onComplete: oneStar()}),
       elements = $('.elem').toArray();
   elements.map(function(element) {
