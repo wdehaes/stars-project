@@ -1,205 +1,147 @@
-$(document).ready(function($) {
-  var size, center, tl, intro;
+// kynd.info 2014
+paper.install(window);
+window.onload = function() {
+  // Setup directly from canvas id:
+  paper.setup('sky');
+  function Ball(r, p, v) {
+    this.radius = r;
+    this.point = p;
+    this.vector = v;
+    this.maxVec = 15;
+    this.numSegment = Math.floor(r / 3 + 2);
+    this.boundOffset = [];
+    this.boundOffsetBuff = [];
+    this.sidePoints = [];
+    this.path = new Path({
+      fillColor: {
+        hue: Math.random() * 360,
+        saturation: 1,
+        brightness: 1
+      },
+      blendMode: 'lighter'
+    });
 
-  var topFirst = $('.start-top__first');
-  var topSecond = $('.start-top__second');
-  var bottom = $('.start-bottom');
-  var he = $('.start-helium');
-  var h = $('.start-hydrogen');
-  var circleText = $('#circle-text');
-
-  var createAlignedText = function(str, path, style) {
-      if (str && str.length > 0 && path) {
-          // create PointText object for each glyph
-          var glyphTexts = [];
-          for (var i = 0; i < str.length; i++) {
-              glyphTexts[i] = createPointText(str.substring(i, i+1), style);
-              glyphTexts[i].justification = "center";
-          }
-          // for each glyph find center xOffset
-          var xOffsets = [0];
-          for (var i = 1; i < str.length; i++) {
-              var pairText = createPointText(str.substring(i - 1, i + 1), style);
-              pairText.remove();
-              xOffsets[i] = xOffsets[i - 1] + pairText.bounds.width -
-                  glyphTexts[i - 1].bounds.width / 2 - glyphTexts[i].bounds.width / 2;
-          }
-          // set point for each glyph and rotate glyph aorund the point
-          for (var i = 0; i < str.length; i++) {
-              var centerOffs = xOffsets[i];
-              if (path.length < centerOffs) {
-                  if (path.closed) {
-                      centerOffs = centerOffs % path.length;
-                  }  else {
-                      centerOffs = undefined;
-                  }
-              }
-              if (centerOffs === undefined) {
-                  glyphTexts[i].remove();
-              } else {
-                  var pathPoint = path.getPointAt(centerOffs);
-                  glyphTexts[i].point = pathPoint;
-                  var tan = path.getTangentAt(centerOffs);
-                  glyphTexts[i].rotate(tan.angle, pathPoint);
-              }
-          }
-      }
-  }
-
-  // create a PointText object for a string and a style
-  var createPointText = function(str, style) {
-      var text = new PointText();
-      text.content = str;
-      if (style) {
-          if (style.font) text.font = style.font;
-          if (style.fontFamily) text.fontFamily = style.fontFamily;
-          if (style.fontSize) text.fontSize = style.fontSize;
-          if (style.fontWeight) text.fontWeight = style.fontWeight;
-      }
-      return text;
-  }
-
-  function generateElement(elementCoord) {
-    if (elementCoord.type === 'circle') {
-      var radius = parseFloat(elementCoord.width) * size.width / 200;
-      var centerPoint = new Point(parseFloat(elementCoord.width) / 200 * size + {x: radius, y: radius});
-      var circle = new Path.Circle(centerPoint, radius);
-      circle.opacity = 0.5;
-      circle.fillColor = 'white';
-
-      var symbol = Math.random() > 0.3 ? "H" : "He";
-      var text = new PointText(centerPoint);
-      text.fillColor = 'white';
-      text.fontFamily = "ConcourseT6";
-      text.fontSize = Math.round(parseFloat(elementCoord.width) * size.width / 275);
-      text.content = symbol;
-      return circle;
+    for (var i = 0; i < this.numSegment; i ++) {
+      this.boundOffset.push(this.radius);
+      this.boundOffsetBuff.push(this.radius);
+      this.path.add(new Point());
+      this.sidePoints.push(new Point({
+        angle: 360 / this.numSegment * i,
+        length: 1
+      }));
     }
   }
 
-  function elementsCreation() {
-    fadeOutCircleText();
-    var elements = elementsCoordinates.map(generateElement);
-    elements.map(
-      function(element, index) {
-        // $(element).attr('id', index);
-        // sky.append(element);
-        var diff = random(0, 1.2);
-        tl.to(element, 2, {opacity:1}, 'elements+=' + diff);
+  Ball.prototype = {
+    iterate: function() {
+      this.checkBorders();
+      if (this.vector.length > this.maxVec)
+        this.vector.length = this.maxVec;
+      this.point += this.vector;
+      this.updateShape();
+    },
+
+    checkBorders: function() {
+      var size = view.size;
+      if (this.point.x < -this.radius)
+        this.point.x = size.width + this.radius;
+      if (this.point.x > size.width + this.radius)
+        this.point.x = -this.radius;
+      if (this.point.y < -this.radius)
+        this.point.y = size.height + this.radius;
+      if (this.point.y > size.height + this.radius)
+        this.point.y = -this.radius;
+    },
+
+    updateShape: function() {
+      var segments = this.path.segments;
+      for (var i = 0; i < this.numSegment; i ++)
+        segments[i].point = this.getSidePoint(i);
+
+      this.path.smooth();
+      for (var i = 0; i < this.numSegment; i ++) {
+        if (this.boundOffset[i] < this.radius / 4)
+          this.boundOffset[i] = this.radius / 4;
+        var next = (i + 1) % this.numSegment;
+        var prev = (i > 0) ? i - 1 : this.numSegment - 1;
+        var offset = this.boundOffset[i];
+        offset += (this.radius - offset) / 15;
+        offset += ((this.boundOffset[next] + this.boundOffset[prev]) / 2 - offset) / 3;
+        this.boundOffsetBuff[i] = this.boundOffset[i] = offset;
       }
-    );
-  }
+    },
 
-  function randomInt(max, min) {
-    if (min === undefined) {
-      min = 0;
+    react: function(b) {
+      debugger
+      var dist = this.point.getDistance(b.point);
+      if (dist < this.radius + b.radius && dist != 0) {
+        var overlap = this.radius + b.radius - dist;
+        var direc = (this.point.subtract(b.point)).normalize(overlap * 0.015);
+        this.vector += direc;
+        b.vector -= direc;
+
+        this.calcBounds(b);
+        b.calcBounds(this);
+        this.updateBounds();
+        b.updateBounds();
+      }
+    },
+
+    getBoundOffset: function(b) {
+      var diff = this.point - b;
+      var angle = (diff.angle + 180) % 360;
+      return this.boundOffset[Math.floor(angle / 360 * this.boundOffset.length)];
+    },
+
+    calcBounds: function(b) {
+      for (var i = 0; i < this.numSegment; i ++) {
+        var tp = this.getSidePoint(i);
+        var bLen = b.getBoundOffset(tp);
+        var td = tp.getDistance(b.point);
+        if (td < bLen) {
+          this.boundOffsetBuff[i] -= (bLen  - td) / 2;
+        }
+      }
+    },
+
+    getSidePoint: function(index) {
+      var sp = this.point;
+      var sdp = this.sidePoints[index];
+      var im = new Point(sp.x + sdp.x, sp.y + sdp.y);
+      var result = im.multiply(this.boundOffset[index]);
+      return result;
+    },
+
+    updateBounds: function() {
+      for (var i = 0; i < this.numSegment; i ++)
+        this.boundOffset[i] = this.boundOffsetBuff[i];
     }
-    return Math.floor(random(max, min));
+  };
+
+  var balls = [];
+  var numBalls = 18;
+  for (var i = 0; i < numBalls; i++) {
+    var position = Point.random().multiply(view.size);
+    var vector = new Point({
+      angle: 360 * Math.random(),
+      length: Math.random() * 10
+    });
+    var radius = Math.random() * 60 + 60;
+    balls.push(new Ball(radius, position, vector));
   }
-  function random(max, min) {
-    if (min === undefined) {
-      min = 0;
+  view.onFrame = function(event) {
+    // debugger
+    for (var i = 0; i < balls.length - 1; i++) {
+      for (var j = i + 1; j < balls.length; j++) {
+        balls[i].react(balls[j]);
+      }
     }
-    return Math.random() * (max - min) + min;
+    for (var i = 0, l = balls.length; i < l; i++) {
+      balls[i].iterate();
+    }
   }
+  view.draw();
 
-  function introText() {
-      tl.to(intro, 0.1, {display:'block'})
-        .from(intro, 0.6, {
-      y: "400px",
-      ease: Back.easeOut.config(1)
-    }, "-=0.1");
-  }
+}
 
-  function introToStart() {
-    tl
-      .to(intro, 1, { opacity: 0, ease: Power2.easeOut, autoAlpha:0 })
-      .add('topFirst', "-=0.5")
-      .to(topFirst, 0.5, { opacity: 1}, 'topFirst')
-      .from(topFirst, 0.5, { y: "30px", ease: Back.easeOut.config(1.4)}, 'topFirst')
-      .add('topSecond', "-=0.25")
-      .to(topSecond, 0.5, { opacity: 1}, 'topSecond')
-      .from(topSecond, 0.5, { y: "30px", ease: Back.easeOut.config(1.4)}, 'topSecond')
-      .add('bottom')
-      .to(bottom, 0.5, {opacity: 1}, 'bottom')
-      .from(bottom, 0.5, { y: "30px", ease: Back.easeOut.config(1.4)}, 'bottom')
-      .add('helium', "-=0.25")
-      .to(he, 0.5, { opacity: 1}, 'helium')
-      .from(he, 0.5, { y: "30px", ease: Back.easeOut.config(4) }, 'helium')
-      .add('hydrogen', "-=0.05")
-      .to(h, 0.5, { opacity: 1}, 'hydrogen')
-      .from(h, 0.5, { y: "30px", ease: Back.easeOut.config(4)}, 'hydrogen');
-  }
 
-  function startToCircleText() {
-    circleText.circleType({radius: 220, dir:-1});
-    for (var i = 22; i <= 43; i++) {
-      $('#circle-text .char' + i).addClass('yellow');
-    };
-
-    tl
-      .add('fade')
-      .to(topFirst, 1, { opacity: 0, ease: Power2.easeOut, autoAlpha:0 }, 'fade')
-      .to(topSecond, 1, { opacity: 0, ease: Power2.easeOut, autoAlpha:0 }, 'fade')
-      .to(bottom, 1, { opacity: 0, ease: Power2.easeOut, autoAlpha:0 }, 'fade')
-      .to(circleText, 1, { opacity: 1, ease: Power2.easeOut }, 'fade');
-      // Path Example
-      // var circleRadius = 200;
-      // var P1 = new paper.Point(center - {x: circleRadius, y: 0});
-      // var P2 = new paper.Point(center + {x: circleRadius, y: 0});
-      // var pMiddle = new paper.Point (center + {x: 0, y: circleRadius} );
-      // var myFirstArc = new paper.Path.Arc(P1, pMiddle, P2);
-      // pathfullySelected = true;
-      // createAlignedText("but these gases were not evenly distributed and began to cluster", myFirstArc, {fontSize: 24, fontFamily: 'ConcourseT6'});
-
-  }
-
-  function fadeOutCircleText() {
-    var letters = $('#circle-text span').toArray().reverse();
-    tl
-      .staggerTo(letters, 0.25, {
-        opacity: 0,
-        autoAlpha: 0
-      }, 0.01)
-      .to(he, 1, { opacity: 0, ease: Power2.easeOut, autoAlpha: 0 }, 0.2)
-      .to(h, 1, { opacity: 0, ease: Power2.easeOut, autoAlpha: 0 }, 0.2)
-  }
-
-  function HeAndHClustering() {
-
-  }
-
-  function init() {
-
-    function scrollIndicator() {
-      var animation = 0;
-
-      var animationFunctions = [
-        introToStart,
-        startToCircleText,
-        elementsCreation
-        // protostar,
-        // starryNight
-      ];
-      var indicator = new WheelIndicator({
-          elem: document.querySelector('body'),
-          callback: function(e){
-            if (animation < animationFunctions.length) {
-              animationFunctions[animation]();
-              animation+=1;
-            }
-          }
-        });
-      indicator.getOption('preventMouse');
-    };
-    tl = new TimelineLite(),
-    intro = $('.intro');
-
-    size = view.size;
-    center = view.center;
-    scrollIndicator();
-    introText();
-  }
-
-  init();
-});
