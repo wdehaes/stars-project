@@ -34,6 +34,7 @@ function centralStarStart(importFunction) {
   function init() {
     sky = $('#elem-sky');
     emptyCanvas();
+    $('body').css('background-color', 'white');
     setTimeout(function () {importFunction('star-start', sky, starStart);}, 1500);
     setTimeout(function () {centralStarTextInitiate();}, 2500);
   }
