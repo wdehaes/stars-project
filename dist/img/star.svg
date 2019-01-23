@@ -1,12 +1,1 @@
-<svg width="33px" height="67px" viewBox="839 157 33 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <defs>
-        <polygon id="path-1" points="32.9288437 66.9780227 0.00103125 66.9780227 0.00103125 0.236872212 32.9288437 0.236872212 32.9288437 66.9780227"></polygon>
-    </defs>
-    <g id="Star" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(855.500000, 190.500000) rotate(-360.000000) translate(-855.500000, -190.500000) translate(839.000000, 157.000000)">
-        <mask id="mask-2" fill="white">
-            <use xlink:href="#path-1"></use>
-        </mask>
-        <g id="Clip-2"></g>
-        <path d="M16.4639062,0.236872212 C16.4639062,6.54385348 13.517625,23.8394974 0,33.6076519 C13.517625,43.3778507 16.4639062,60.6734947 16.4639062,66.9784316 C16.4639062,60.6734947 19.4112187,43.3778507 32.9288437,33.6076519 C19.4112187,23.8394974 16.4639062,6.54385348 16.4639062,0.236872212 L52.056338,27.4513889" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
-    </g>
-</svg>
+<svg height="67" viewBox="839 157 33 67" width="33" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><mask id="a" fill="#fff"><path d="m32.9288437 66.9780227h-32.92781245v-66.74115049h32.92781245z" fill="#fff" fill-rule="evenodd"/></mask><path d="m16.4639062.23687221c0 6.30698127-2.9462812 23.60262519-16.4639062 33.37077969 13.517625 9.7701988 16.4639062 27.0658428 16.4639062 33.3707797 0-6.3049369 2.9473125-23.6005809 16.4649375-33.3707797-13.517625-9.7681545-16.4649375-27.06379842-16.4649375-33.37077969l35.5924318 27.21451669" fill="#fff" fill-rule="evenodd" mask="url(#a)" transform="translate(839 157)"/></svg>
