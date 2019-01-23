@@ -1,0 +1,9 @@
+
+<svg width="119px" height="125px" viewBox="45 0 119 125" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Group-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(45.000000, 0.000000)">
+        <path d="M98,124.5 C127.271092,124.5 120,72 111,48 C102,24 83.2710917,0.5 54,0.5 C24.7289083,0.5 0.5,39.2289083 0.5,68.5 C0.5,97.7710917 68.7289083,124.5 98,124.5 Z" id="HeNebula" fill="#FFFFFF" opacity="0.315846549"></path>
+        <text id="He" font-family="LucidaGrande-Bold, Lucida Grande" font-size="28" font-weight="bold" letter-spacing="0.102272719" fill="#FFFFFF">
+            <tspan x="42.0450665" y="73">He</tspan>
+        </text>
+    </g>
+</svg>

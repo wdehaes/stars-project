@@ -62,12 +62,12 @@ function centralStarOne() {
     centralStarTextChange(2, explanation);
   }});
 }
- 
+
 function centralStarTextChange(n, target) {
   var textArray = [
     '<p>A star’s external <span class="oker">gravity</span></p>&#13;<p>and internal core <span class="oker">energy</span> put pressure on one another</p>',
     '<p>resulting in a supernova</p>&#13;<p>and one of <span class="oker">two</span> endothermic processes</p>',
-    '<p><span class="oker">one</span> during a massive explosion</p>'
+    '<p>---Work In Progress -- Demo ends here---</p>'
     ];
     target.empty();
     target.append(textArray[n]);

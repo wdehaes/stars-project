@@ -1,0 +1,12 @@
+<svg width="33px" height="67px" viewBox="839 157 33 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <polygon id="path-1" points="32.9288437 66.9780227 0.00103125 66.9780227 0.00103125 0.236872212 32.9288437 0.236872212 32.9288437 66.9780227"></polygon>
+    </defs>
+    <g id="Star" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(855.500000, 190.500000) rotate(-360.000000) translate(-855.500000, -190.500000) translate(839.000000, 157.000000)">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Clip-2"></g>
+        <path d="M16.4639062,0.236872212 C16.4639062,6.54385348 13.517625,23.8394974 0,33.6076519 C13.517625,43.3778507 16.4639062,60.6734947 16.4639062,66.9784316 C16.4639062,60.6734947 19.4112187,43.3778507 32.9288437,33.6076519 C19.4112187,23.8394974 16.4639062,6.54385348 16.4639062,0.236872212 L52.056338,27.4513889" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
+    </g>
+</svg>

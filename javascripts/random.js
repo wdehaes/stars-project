@@ -1,7 +1,11 @@
-    function randomInt(max, min = 0) {
+    function randomInt(max, min) {
+      if (min == undefined) { min = 0}
       return Math.floor(random(max, min));
     }
-    function random(max, min = 0) {
+    function random(max, min) {
+      if (min == undefined) {
+        min = 0
+      }
       return Math.random() * (max - min) + min;
     }
 
