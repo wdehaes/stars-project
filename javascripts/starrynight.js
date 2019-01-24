@@ -34,10 +34,6 @@
       // tlTwinkle.to(star, appearTime, {opacity: maxBrightness}, "-=" + (numberOfStars-1)*totalAppearTime/numberOfStars);
     }
 
-    function twinkleStars() {
-      // body...
-    }
-
     function init() {
       var oneStar = $('.elem#20'),
           atoms = $('.atom').toArray(),
