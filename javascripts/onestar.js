@@ -48,7 +48,7 @@ function oneStar(importFunction) {
     });
     elementsText(1);
   }
-  
+
   function determineCoordinates() {
     boundingRectProtostar = bg[0].getBoundingClientRect();
     radius = boundingRectProtostar.width/2 * scale;
