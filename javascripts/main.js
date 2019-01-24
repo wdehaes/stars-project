@@ -66,7 +66,7 @@ function random(max, min) {
 }
 
 function importSVG(svgName, target, callback) {
-  $.get('/img/' + svgName + '.svg', function(data) {
+  $.get('img/' + svgName + '.svg', function(data) {
     target.append($(data).contents());
     if (callback !== undefined) {
       callback();
