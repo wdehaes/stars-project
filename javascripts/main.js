@@ -40,12 +40,10 @@ $(document).ready(function() {
     { func: startToCircleText},
     { func: elementsCreation, argument: importSVG},
     { func: oneStar, argument: importSVG},
-    // { func: starryNight},
     { func: centralStarStart, argument: importSVG },
     { func: centralStarSupernova},
     { func: centralStarOne},
     { func: centralStarSwitch, argument: [importSVG, 'star-start', 'star-outer-collapse']}
-    // { func: centralStarSwitch, argument: [importSVG, 'star-outer-collapse', 'star-inner-expands']}
   ];
 
   var circleText = $('#circle-text');
